@@ -1,5 +1,6 @@
 {
-    "name": "Simple Toggle Card",
+    "name": "Toggle card to hacs",
     "render_readme": true,
-    "filename": "floor-plan-card.js",
+    "filename": "card.js",
+    "content_in_root": true
   }

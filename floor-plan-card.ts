@@ -4,8 +4,8 @@ import {
   css,
 } from "lit";
 
-import {state} from "lit/decorators";
-import { HassEntity } from "home-assistant-js-websocket";
+// import {state} from "lit/decorators";
+// import { HassEntity } from "home-assistant-js-websocket";
 
 // export class ClockController implements ReactiveController {
 //   host: ReactiveControllerHost;
@@ -33,19 +33,19 @@ import { HassEntity } from "home-assistant-js-websocket";
 //   }
 // }
 
-function loadCSS(url) {
-  const link = document.createElement("link");
-  link.type = "text/css";
-  link.rel = "stylesheet";
-  link.href = url;
-  document.head.appendChild(link);
-}
+// function loadCSS(url) {
+//   const link = document.createElement("link");
+//   link.type = "text/css";
+//   link.rel = "stylesheet";
+//   link.href = url;
+//   document.head.appendChild(link);
+// }
 
-loadCSS("https://fonts.googleapis.com/css?family=Gloria+Hallelujah");
-interface Config {
-  header: string;
-  entity: string;
-}
+// loadCSS("https://fonts.googleapis.com/css?family=Gloria+Hallelujah");
+// interface Config {
+//   header: string;
+//   entity: string;
+// }
 
 class FloorPlanCard extends LitElement {
   // static get properties() {
@@ -54,9 +54,9 @@ class FloorPlanCard extends LitElement {
   //     config: {},
   //   };
   // }
-  @state() private _state: HassEntity;
+  // @state() private _state: HassEntity;
   hass: any
-  @state()
+  // @state()
   config: any
 
   render() {
@@ -179,3 +179,14 @@ class FloorPlanCard extends LitElement {
 // }
 
 customElements.define("floor-plan-card", FloorPlanCard);
+declare global {
+  interface Window {
+    customCards: Array<Object>;
+  }
+}
+window.customCards = window.customCards || [];
+window.customCards.push({
+    type: "floor-plan-card",
+    name: "Bringing the Floor plan card to HACS",
+    description: "Create a floor plan",
+});

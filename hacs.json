@@ -1,6 +1,5 @@
 {
-    "name": "Toggle card to hacs",
+    "name": "Floor plan card to hacs",
     "render_readme": true,
-    "filename": "card.js",
-    "content_in_root": true
+    "filename": "floor-plan-card.js"
   }

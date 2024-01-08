@@ -152,3 +152,9 @@ __decorate([
 //   }
 // }
 customElements.define("floor-plan-card", FloorPlanCard);
+window.customCards = window.customCards || [];
+window.customCards.push({
+    type: "floor-plan-cards",
+    name: "Bringing the Floor plan card to HACS",
+    description: "Create a floor plan",
+});

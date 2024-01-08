@@ -1,19 +1,16 @@
-import {
-  LitElement,
-  html,
-  css,
-} from "lit";
-
-import {state} from "lit/decorators";
-import { HassEntity } from "home-assistant-js-websocket";
-
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+import { LitElement, html, css, } from "lit";
+import { state } from "lit/decorators";
 // export class ClockController implements ReactiveController {
 //   host: ReactiveControllerHost;
-
 //   value = new Date();
 //   timeout: number;
 //   private _timerID?: number;
-
 //   constructor(host: ReactiveControllerHost, timeout = 1000) {
 //     (this.host = host).addController(this);
 //     this.timeout = timeout;
@@ -32,72 +29,49 @@ import { HassEntity } from "home-assistant-js-websocket";
 //     this._timerID = undefined;
 //   }
 // }
-
 function loadCSS(url) {
-  const link = document.createElement("link");
-  link.type = "text/css";
-  link.rel = "stylesheet";
-  link.href = url;
-  document.head.appendChild(link);
+    const link = document.createElement("link");
+    link.type = "text/css";
+    link.rel = "stylesheet";
+    link.href = url;
+    document.head.appendChild(link);
 }
-
 loadCSS("https://fonts.googleapis.com/css?family=Gloria+Hallelujah");
-interface Config {
-  header: string;
-  entity: string;
-}
-
 class FloorPlanCard extends LitElement {
-  // static get properties() {
-  //   return {
-  //     hass: {},
-  //     config: {},
-  //   };
-  // }
-  @state() private _state: HassEntity;
-  hass: any
-  @state()
-  config: any
-
-  render() {
-    var _this = this;
-    const bitmap = this.config.entities.map(function(entity) {return _this.hass.states[entity].state == "on" ? "1" : "0"}).join("")
-    console.log(_this.config)
-    return html`
+    render() {
+        var _this = this;
+        const bitmap = this.config.entities.map(function (entity) { return _this.hass.states[entity].state == "on" ? "1" : "0"; }).join("");
+        console.log(_this.config);
+        return html `
       <ha-card>
         <img src="/local/images/floor_plan_lights/${bitmap}.jpg" class='floor-plan'>
         ${this.config.elements.map((e) => {
-            return html`
-            <img src='/local/images/bulb-off.png' @click=${() => {console.log('clicked', _this._toggle(e.entity))}} class='element ${_this.hass.states[e.entity].state}' style='left:${e.style.left};top:${e.style.top}' >
-            `}
-        )}
+            return html `
+            <img src='/local/images/bulb-off.png' @click=${() => { console.log('clicked', _this._toggle(e.entity)); }} class='element ${_this.hass.states[e.entity].state}' style='left:${e.style.left};top:${e.style.top}' >
+            `;
+        })}
       </ha-card>
     `;
-  }
-
-  setConfig(config) {
-    if (!config.entities) {
-      throw new Error("You need to define entities");
     }
-    var _this = this
-    this.config = config;
-
-  }
-
-  // The height of your card. Home Assistant uses this to automatically
-  // distribute all cards over the available columns.
-  getCardSize() {
-    return 2;
-  }
-
-  _toggle(entity_id) {
-    this.hass.callService("homeassistant", "toggle", {
-      entity_id: entity_id,
-    });
-  }
-
-  static get styles() {
-    return css`
+    setConfig(config) {
+        if (!config.entities) {
+            throw new Error("You need to define entities");
+        }
+        var _this = this;
+        this.config = config;
+    }
+    // The height of your card. Home Assistant uses this to automatically
+    // distribute all cards over the available columns.
+    getCardSize() {
+        return 2;
+    }
+    _toggle(entity_id) {
+        this.hass.callService("homeassistant", "toggle", {
+            entity_id: entity_id,
+        });
+    }
+    static get styles() {
+        return css `
       .floor-plan{
           max-width: 100%;
           max-height: 100%;
@@ -115,8 +89,14 @@ class FloorPlanCard extends LitElement {
             filter: invert(1);
       }
     `;
-  }
+    }
 }
+__decorate([
+    state()
+], FloorPlanCard.prototype, "_state", void 0);
+__decorate([
+    state()
+], FloorPlanCard.prototype, "config", void 0);
 // class ContentCardExample extends LitElement {
 //     static get properties() {
 //     return {
@@ -124,8 +104,6 @@ class FloorPlanCard extends LitElement {
 //       config: {},
 //     };
 //   }
-  
-  
 // // 1111101101
 // // 0000000
 //   render(){
@@ -139,7 +117,6 @@ class FloorPlanCard extends LitElement {
 //       <img src="/local/images/floor_plan_lights/${bitmap}.jpg" class='floor-plan' width='400px'>
 //     `;
 //   }
-
 //   // The user supplied configuration. Throw an exception and Home Assistant
 //   // will render an error card.
 //   setConfig(config) {
@@ -153,19 +130,16 @@ class FloorPlanCard extends LitElement {
 //   getCardSize() {
 //     return 3;
 //   }
-  
 //   _toggle(state) {
 //     this.hass.callService("homeassistant", "toggle", {
 //       entity_id: state.entity_id,
 //     });
 //   }
-  
 //   static get styles() {
 //     return css`
 //       .card-content{
 //           width: 400px;
 //       }
-      
 //       img{
 //         max-width: 100%;
 //         max-height: 100%;
@@ -177,5 +151,4 @@ class FloorPlanCard extends LitElement {
 //     `;
 //   }
 // }
-
 customElements.define("floor-plan-card", FloorPlanCard);

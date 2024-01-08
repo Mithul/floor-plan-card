@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "isolatedModules": true,
+    // "isolatedModules": true,
     "target": "es2017",
     "moduleResolution": "node",
     "experimentalDecorators": true,
